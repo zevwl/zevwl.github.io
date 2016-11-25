@@ -1,9 +1,8 @@
-var map;
+let map;
 
 function initMap() {
 
-    var isGeoAvailable = true;
-    var currentPosition;
+    let currentPosition;
 
     if ('geolocation' in navigator) {
         navigator.geolocation.getCurrentPosition(function (position) {
