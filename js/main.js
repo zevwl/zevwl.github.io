@@ -1,20 +1,30 @@
 let map;
 
 function initMap() {
+    
+    if (navigator.geolocation) {
 
-    let currentPosition;
-
-    if ('geolocation' in navigator) {
         navigator.geolocation.getCurrentPosition(function (position) {
-            var coords = position.coords;
-            currentPosition = { lat: coords.latitude, lng: coords.longitude };
-        });
-    } else {
-        currentPosition = { lat: 41.341090, lng: -74.168289 };
-    }
 
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: currentPosition,
-        zoom: 16
-    });
+            let coords = position.coords;
+            let currentPosition = { lat: coords.latitude, lng: coords.longitude };
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: currentPosition,
+                zoom: 16
+            });
+
+            let marker = new google.maps.Marker({
+                position: currentPosition,
+                map: map
+            });
+        });
+
+    } else {
+
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: 41.341090, lng: -74.168289 },
+            zoom: 16
+        });
+    }
 }
